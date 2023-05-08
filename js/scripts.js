@@ -391,3 +391,24 @@ function menuChange(item) {
     menuCounter++
     closeMenu()
 }
+
+
+// *********************************************************************
+// virtual keyboard
+
+// get all the keys
+const keys = document.querySelectorAll('.key');
+
+// event listener for each key
+keys.forEach(key => {
+  key.addEventListener('click', () => {
+    // input key
+    const input = document.activeElement;
+
+    // key value
+    const value = key.getAttribute('data-value');
+
+    // append the value to the input element
+    input.value += value;
+  });
+});
