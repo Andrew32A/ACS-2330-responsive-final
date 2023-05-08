@@ -280,8 +280,9 @@ p {
   .keyboard-container {
     display: flex;
     flex-direction: column;
-    background-color: #ddd;
+    background-color: #1C1C1E;
     padding: 10px;
+    margin-top: 2em;
     border-radius: 5px;
   }
 
@@ -294,6 +295,7 @@ p {
     margin: 5px;
     font-size: 20px;
     background-color: #fff;
+    color: black;
     border: none;
     border-radius: 3px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
