@@ -326,12 +326,24 @@ p {
   } */
 /* } */
 
-.mobile-input {
-  display: none;
+.quoteDisplayWrapper {
+  position: relative;
+}
+
+.mobileInput {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
 }
 
 @media only screen and (max-width: 768px) {
   .mobile-input {
-    display: block;
+    opacity: 1;
+    pointer-events: auto;
   }
 }
