@@ -213,6 +213,7 @@ p {
 
 #quoteDisplay {
   margin-top: 10px; /* this is to adjust the spacing between quote display and timer for the timer's padding */
+  z-index: 100;
 }
 
 /* ******************************************* */
@@ -330,13 +331,13 @@ p {
   position: relative;
 }
 
-.mobileInput {
+.mobileInput > input {
   position: absolute;
   height: 100%;
   width: 100%;
   top: 0;
   left: 0;
-  pointer-events: none;
+  /* pointer-events: none; */
   z-index: 2;
   opacity: 0;
 }
