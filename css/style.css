@@ -282,12 +282,13 @@ p {
   }
 
   .keyboard-container {
-    width: 95vw;
+    width: 22em;
     margin: auto;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     background-color: #1C1C1E;
-    padding: 10px;
+    padding: 5px;
     margin-top: 2em;
     border-radius: 5px;
   }
