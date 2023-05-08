@@ -401,7 +401,7 @@ const keys = document.querySelectorAll('.key');
 
 // event listener for each key
 keys.forEach(key => {
-  key.addEventListener('click', () => {
+  key.addEventListener('touchstart', () => {
     // input key
     const input = document.activeElement;
 

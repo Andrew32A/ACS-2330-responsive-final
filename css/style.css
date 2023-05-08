@@ -277,13 +277,13 @@ p {
 
 /* mobile */
 @media only screen and (max-width: 480px) {
-  body {
-    width: 400px;
-    margin: auto;
+  html {
+    width: 100vw;
   }
 
   .keyboard-container {
-    width: 400px;
+    width: 95vw;
+    margin: auto;
     display: flex;
     flex-direction: column;
     background-color: #1C1C1E;
@@ -309,7 +309,12 @@ p {
     outline: none;
   }
 
-  @media (min-width: 600px) {
+  .key-space {
+    width: 500px;
+    flex-grow: 20;
+  }
+
+  /* @media (min-width: 600px) {
     .keyboard-container {
       flex-direction: row;
     }
@@ -317,5 +322,5 @@ p {
     .keyboard-row {
       flex: 1;
     }
-  }
+  } */
 }
