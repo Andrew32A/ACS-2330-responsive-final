@@ -1,0 +1,267 @@
+/* color palette
+    --bg-color: #1b2028;
+    --main-color: #23a9d5;
+    --caret-color: #4b5975;
+    --sub-color: #4b5975;
+    --sub-alt-color: #151a21;
+    --text-color: #ccccb5;
+    --error-color: #b81b2c;
+    --error-extra-color: #84131f;
+    --colorful-error-color: #b81b2c;
+    --colorful-error-extra-color: #84131f;
+*/
+
+@keyframes transitionIn {
+  from {
+      opacity: 0;
+      transform: translateY(-100px) scale3d(0);
+  }
+
+  to {
+      opacity: 1;
+      transform: translateY(0) scale3d(2, 2);
+  }
+}
+
+@keyframes transitionOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale3d(2, 2);
+  }
+
+  to {
+      display: none;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-100px) scale3d(0);
+  }
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; 
+  background-color: #1b2028;
+}
+
+.welcome {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  background: #4A4A4A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  letter-spacing: 2px;
+  color: #FFF; 
+}
+
+.heading {
+  font-family: "Comic Sans";
+  font-size: 50px;
+  margin-bottom: 0px;
+  opacity: 0; 
+}
+
+.sub-heading {
+  font-size: 16px;
+  font-weight: 100;
+  letter-spacing: 2px;
+  font-family: "Avenir Next";
+  margin-bottom: 40px;
+  opacity: 0; 
+}
+
+.loader-wrapper {
+  height: 2px;
+  width: 150px;
+  background: #ededed;
+  border-radius: 100px;
+  opacity: 0; 
+}
+
+.loader {
+  height: 2px;
+  width: 150px;
+  background: #FFF;
+  border-radius: 100px;
+  background: #585858; 
+}
+
+p {
+  max-width: 600px;
+  font-family: "Avenir", "arial";
+  line-height: 25px;
+  text-align: justify;
+  opacity: 0;
+  color: #4b5975; 
+  font-weight: 400;
+  font-size: 1em;
+  font-variant: no-common-ligatures;
+  font-size: 20px;
+  padding: 1em;
+}
+
+.correct {
+  color: #ccccb5;
+}
+
+.incorrect {
+  color: #b81b2c;
+  text-decoration: underline;
+}
+
+.info {
+  border-top: #4b5975 solid 1px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.reset {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  padding: 5px;
+  padding-left: 0px; /* may need to change this later, tried to get the "background image" as close as I could to the center || background image is a bit jank but this is the only way I could get the hover to work */
+  margin: auto;
+  min-width: 27px; /* had to use mins and max, normal attributes weren't working || also something else is adjusting px size, so the values here are -10 and -5 px of displayed value respectively */
+  min-height: 15px;
+  max-width: 27px;
+  max-height: 15px;
+  background-image: url("../icons/refresh1.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+}
+
+.reset:hover {
+  background-image: url("../icons/refresh2.png");
+}
+
+.resultsHidden {
+  display: flex;
+  animation: transitionOut 1s;
+  animation-fill-mode: forwards;
+}
+
+.resultsDisplay {
+  display: flex;
+  animation: transitionIn 1s;
+  visibility: visible;
+}
+
+/* adds color to wpm number when session is finished */
+.wpmResults {
+  color: #23a9d5;
+}
+
+.mistakesResultsPerfect {
+  color: #23a9d5;
+}
+
+.mistakesResultsRed {
+  color: #b81b2c
+}
+
+#accuracyDisplay {
+  color: #23a9d5;
+}
+
+#charactersDisplay {
+  color: #23a9d5;
+}
+
+@keyframes blink {
+  from {
+      border-right: 1px solid #ccccb5;
+      /* transform: translateY(-100px) scale3d(0); */
+  }
+
+  to {
+      border-right: 1px solid #1b2028;
+      /* transform: translateY(0) scale3d(2, 2); */
+  }
+}
+
+@keyframes firstBlink {
+  from {
+      border-left: 1px solid #ccccb5;
+      /* transform: translateY(-100px) scale3d(0); */
+  }
+
+  to {
+      border-left: 1px solid #1b2028;
+      /* transform: translateY(0) scale3d(2, 2); */
+  }
+}
+
+.blinking {
+  animation: blink 1s;
+  animation-iteration-count: infinite;
+}
+
+.firstBlinking {
+  animation: firstBlink 1s;
+  animation-iteration-count: infinite;
+}
+
+#quoteDisplay {
+  margin-top: 10px; /* this is to adjust the spacing between quote display and timer for the timer's padding */
+}
+
+/* ******************************************* */
+/* styles for timer menu */
+#menu {
+  display: flex;
+  align-items: center;
+  /* might need to change width sizing later */
+  width: 125px;
+  font-family: "Avenir", "arial";
+  line-height: 25px;
+  text-align: justify;
+  font-weight: 400;
+  font-size: 1em;
+  font-variant: no-common-ligatures;
+  font-size: 20px;
+  padding: 10px 20px 10px;
+  border: 0;
+  margin: 0;
+  border-radius: 10px;
+  cursor: default;
+  white-space: nowrap;
+}
+
+#timeDisplay {
+  padding: 0;
+  margin: 0;
+  border-left: 10px;
+  color: #23a9d5;
+  height: 25px;
+  width: 27px;
+  cursor: pointer;
+}
+
+#timeDisplay:hover {
+  color: #ccccb5;
+}
+
+.item {
+  padding-bottom: 0;
+  margin: 0;
+  color: #4b5975;
+  /* border-radius: 10px; */
+  opacity: -2; /* had to set opacity to -1 to avoid weird stutter from bounceback effect in anime.js */
+  list-style: none;
+  visibility: hidden;
+}
+
+.item:hover {
+  color: #ccccb5;
+  cursor: pointer;
+}

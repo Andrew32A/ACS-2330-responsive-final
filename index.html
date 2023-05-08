@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Typing Gym</title>
+	<!-- stylesheet -->
+	<link rel="stylesheet" href="./css/style.css">
+	<!-- preload restart button hover image -->
+	<link rel="preload" href="./icons/refresh2.png" as="image">
+	<!-- favicon -->
+	<link rel="icon" type="image/x-icon" href="./icons/favicon.webp">
+	<!-- javascript (defer src means that it waits for completed page load before running) -->
+	<script defer src="./js/anime.js"></script>
+	<script defer src="./js/welcome.js"></script>
+	<script defer src="./js/scripts.js" type="text/javascript"></script>
+</head>
+<body>
+	<section class="content">
+		<div id="menu">
+			<p id="timeDisplay" class="menuParent">30</p>
+			<div id="item1" class="item" onclick="menuChange(item1)">
+				15
+			</div>
+			<div id="item2" class="item" onclick="menuChange(item2)">
+				30
+			</div>
+			<div id="item3" class="item" onclick="menuChange(item3)">
+				60
+			</div>
+			<div id="item4" class="item" onclick="menuChange(item4)">
+				120
+			</div>
+		</div>
+
+		<p id="quoteDisplay"></p>
+
+		<div class="info">
+			<p id="wpm">wpm:</p>
+			<p id="wpmDisplay">--</p>
+			<p id="mistakes">mistakes:</p>
+			<p id="mistakesDisplay">--</p>
+		</div>	
+		
+		<p class="reset" style="width: 5%" onclick="resetLoop()"></p>
+		
+		<div id="results" class="resultsHidden"> 
+			
+			<p>accuracy:</p>
+			<p id="accuracyDisplay">--</p>
+			<p>characters:</p>
+			<p id="charactersDisplay">--</p>
+		</div>
+	</section>
+
+	<div class="welcome">
+		<h1 class="heading">Typing Gym</h1>
+		<h3 class="sub-heading">By Andrew Alsing</h3>
+		<div class="loader-wrapper">
+			<div class="loader"></div>
+		</div>
+	</div>
+</body>
+</html>
