@@ -1,153 +1,17 @@
-# Typing Gym:
-For anybody who wants to improve their typing skills without the ad bloat! Typing Gym helps improve WPM and accuracy while typing. I made this project because I was fed up with the ads and cookies on popular typing tests.
-This was also a great way for me to practice JavaScript and apply some of the knowledge I've gained these last few weeks while using various frameworks and api integration.
+# Reponsive Typing Gym:
+Final project for ACS-2330
 
-<h2 align="center"><a href="https://andrew32a.github.io/typing-gym/">Click here to try it out!</a></h3>
+<h2 align="center"><a href="https://github.com/Andrew32A/typing-gym">Original Repo</a></h3>
 
-<img src="https://github.com/Andrew32A/typing_gym/blob/main/icons/readme_screenshot.png" align="center">
+# Wireframes/Digital Mockups
+<img src="https://github.com/Andrew32A/ACS-2330-responsive-final/blob/main/images/desktop1.png" align="center">
+<img src="https://github.com/Andrew32A/ACS-2330-responsive-final/blob/main/images/desktop2.png" align="center">
+<img src="https://github.com/Andrew32A/ACS-2330-responsive-final/blob/main/images/mobile1.png" align="center">
+<img src="https://github.com/Andrew32A/ACS-2330-responsive-final/blob/main/images/mobile2.png" align="center">
 
-# How it works:
-On page load, my script grabs a randomly generated quote from https://api.quotable.io and splits the string up into individual spans.
+# User Journeys
+>As a busy professional, I want to improve my typing speed and accuracy during my daily commute. I open Typing Gym on my mobile device, tap on the quote, and start typing. The virtual keyboard pops up and I feel like I'm at a real keyboard. The quotes are challenging but not too difficult, and I can see my progress over time. I appreciate that even if the API is down, I can still practice with the offline database.
 
-```javascript
-const random_quote_api_url = 'https://api.quotable.io/random'
+>As a high school student, I want to get better at typing so I can finish my essays faster. I open Typing Gym on my laptop and select the desktop layout. I like that the quotes are randomly generated and that I can choose different levels of difficulty. The timer adds a bit of pressure which helps me focus. I also appreciate that the website gives me feedback on my mistakes so I can improve.
 
-// fetches quote from api
-async function getQuote() {
-    return await fetch(random_quote_api_url)
-        .then(response => response.json())
-        .then(data => data.content)
-}
-
-// recieves quote from getQuote, splits it into an array, and displays each in its own span tag
-async function getNextQuote() {
-    const quote = await getQuote()
-    quoteDisplay.innerText = ""
-    quoteSplit = quote.split("")
-    quoteSplit.forEach(character => {
-        characterSpan = document.createElement("span")
-        characterSpanArray.push(characterSpan)
-        characterSpan.innerText = character.toLowerCase()
-        quoteDisplay.appendChild(characterSpan)
-    })
-    characterSpanArray[0].classList.add("firstBlinking") 
-    console.log(quote)
-}
-```
-
-When the user types, the script will assign either a "correct" or "incorrect" class name onto the proper span element in the array. These two tags mostly just handle the
-styling, but the scoring is also handled next to the class reassignment inside of the event listener's conditionals.
-
-```javascript
-document.addEventListener("keydown", (e) => {
-    let keyStroke = e.key
-    let code = e.code
-    let character = quoteSplit[counter]
-
-    if (allowTyping === true) {
-        if (isTimerStarted === true) {
-            timerInterval = setInterval(timer, 1000)
-            isTimerStarted = false
-        }
-
-        if (keyStroke === character.toLowerCase()) {       
-            characterSpanArray[counter].classList.add("correct")
-            blinkyThing()
-            counter += 1
-            totalCounter += 1
-        }
-
-        else if (keyStroke === "Backspace" && counter > 0) {
-            if (characterSpanArray[counter - 1].classList.contains("incorrect")) {
-                characterSpanArray[counter - 1].classList.remove("incorrect")
-                characterSpanArray[counter - 1].classList.remove("correct")
-                counter -= 1
-                totalCounter -= 1
-                mistakesCounter -= 1  
-                blinkyThing(-1)
-            }
-
-            else {
-                counter -= 1
-                totalCounter -= 1
-                characterSpanArray[counter].classList.remove("correct")   
-                blinkyThing(-1)
-            } 
-        }
-
-        else if (keyStroke != character.toLowerCase() && isAlpha(keyStroke) === true) {
-            characterSpanArray[counter].classList.add("incorrect")
-            blinkyThing()
-            counter += 1
-            totalCounter += 1
-            mistakesCounter += 1
-        }
-```
-
-If the api doesn't load for whatever reason, I added a local json file containing quotes that the script then loads data from.
-
-```javascript
-function offlineQuotes() {
-    offlineIndex = Math.floor(Math.random() * 2000)
-    console.log(offlineIndex)
-
-    return fetch('./data.json')
-    .then(response => {
-        return response.json()
-    })
-    .then(data => {
-        return data[offlineIndex].content
-    })
-    .catch(error => console.log(error));
-}
-```
-
-# What I've learned:
-Although this project seems pretty straightforward, there were a bunch of issues early in development. Firstly, there was no "isAlpha" function in JavaScript so I had to
-make my own: 
-
-```javascript 
-const isAlpha = function(ch) {
-    return typeof ch === "string" && ch.length === 1 && (ch >= "a" && ch <= "z" || ch >= "A" && ch <= "Z");
-}
-```
-
-Also, one of the biggest hurdles was the blinking cursor logic which signaled the user where their cursor was positioned. I ended up doing something similar to the
-"correct" and "incorrect" class names and assigning the correct span index with a "blinking" tag which had some keyframes and border styling attached to it. When the user would type or the timer hits zero, a function would erase all "blinking" class tags from all span elements
-then reassign the correct span with "blinking". This was especially tricky when the user would hit "backspace" so we had to add an argument which would inverse the array position selector to hit the span before the current index.
-
-However, the cursor logic would break whenever the user would go from index 1 to index 0. I found this really handy thing called try, catch, and finally which checks for a TypeError and corrects the behavior by binding index 0 with the left border keyframe animations.
-
-``` javascript
-function blinkyThing(counterPositionModifier = 0) {
-    try {
-        characterSpanArray.forEach((span) => {
-            span.classList.remove("blinking")
-            span.classList.remove("firstBlinking")
-        })
-        characterSpanArray[counter + counterPositionModifier].classList.add("blinking") 
-    }
-
-    catch (err) {
-        if (err instanceof TypeError) {
-            characterSpanArray.forEach((span) => {
-                span.classList.remove("blinking")
-                span.classList.remove("firstBlinking")
-            })
-        characterSpanArray[0].classList.add("firstBlinking") 
-        }
-    }
-}
-```
-
-# Credit:
-Huge props to these amazing folks who helped me out with this project throughout its development!!: <br> <br>
-https://github.com/alexcrocha <br>
-https://github.com/Babaganouche622 <br>
-https://github.com/EvilGenius13 <br>
-https://github.com/jennifercarreno
-
-# Known bugs:
-- If the user hits 2 keys at once at the end of a quote, the program may break. This seems to be especially sensitive to non-alphabetical characters + any other key or spamming the reset button too quickly.
-- The blinking cursor may update the width of the container which causes a jarring jolt
-- ~~If the quote doesn't show up, it may mean that the api is down. Check https://downforeveryoneorjustme.com/quotable.io or https://github.com/lukePeavey/quotable to see the status of the api~~
+>As a retiree, I want to keep my mind sharp and learn something new. I discover Typing Gym and decide to try it out on my tablet. The mobile layout is easy to use and I appreciate that I don't have to download any apps. The quotes are interesting and I like that I can learn new things while practicing my typing. Even if the internet is down, I can still practice with the offline database.
