@@ -273,6 +273,7 @@ p {
 .quoteDisplayWrapper {
   position: relative;
   max-width: 35em;
+  margin: auto;
 }
 
 .mobileInput > input {
