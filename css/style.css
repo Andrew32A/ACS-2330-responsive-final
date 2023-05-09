@@ -268,67 +268,11 @@ p {
 }
 
 /* ******************************************* */
-/* virtual keyboard */
-
-/* desktop */
-
-/* .keyboard-container {
-  display: none;
-} */
-
 /* mobile */
-/* @media only screen and (max-width: 480px) {
-  html {
-    width: 100vw;
-  }
-
-  .keyboard-container {
-    width: 22em;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #1C1C1E;
-    padding: 5px;
-    margin-top: 2em;
-    border-radius: 5px;
-  }
-
-  .keyboard-row {
-    display: flex;
-  }
-
-  .key {
-    flex: 1;
-    margin: 5px;
-    font-size: 20px;
-    background-color: #fff;
-    color: black;
-    border: none;
-    border-radius: 3px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    outline: none;
-  }
-
-  .key-space {
-    width: 500px;
-    flex-grow: 20;
-  } */
-
-  /* @media (min-width: 600px) {
-    .keyboard-container {
-      flex-direction: row;
-    }
-
-    .keyboard-row {
-      flex: 1;
-    }
-  } */
-/* } */
 
 .quoteDisplayWrapper {
   position: relative;
+  max-width: 35em;
 }
 
 .mobileInput > input {
@@ -337,14 +281,19 @@ p {
   width: 100%;
   top: 0;
   left: 0;
-  /* pointer-events: none; */
   z-index: 2;
   opacity: 0;
+  cursor: default;
 }
 
 @media only screen and (max-width: 768px) {
   .mobile-input {
     opacity: 1;
     pointer-events: auto;
+  }
+
+  .quoteDisplayWrapper {
+    position: relative;
+    max-width: 25em;
   }
 }
